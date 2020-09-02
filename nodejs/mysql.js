@@ -3,7 +3,7 @@ var mysql      = require('mysql');
 var connection = mysql.createConnection({ //mysql연결
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : '123456',
   database : 'opentutorials'
 });
   
