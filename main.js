@@ -2,6 +2,7 @@ var http = require('http'); //서버구축
 var url = require('url'); //쿼리스트링
 var topic = require('./lib/topic');
 var author = require('./lib/author');
+var login = require('./lib/login');
 
 var app = http.createServer(function(request,response){ //서버시작
     var _url = request.url;
@@ -34,6 +35,10 @@ var app = http.createServer(function(request,response){ //서버시작
         author.update_process(request,response);
     }else if (pathname === '/author/delete_process'){
         author.delete_process(request,response);
+    }else if(pathname == '/login'){
+        login.login(request,response);
+    }else if(pathname == '/login_process'){
+
     }else{
         response.writeHead(404);
         response.end('Not found');
