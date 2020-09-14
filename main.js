@@ -3,34 +3,11 @@ var url = require('url'); //쿼리스트링
 var db = require('./lib/db');
 var topic = require('./lib/topic');
 var author = require('./lib/author');
-var login = require('./lib/login');
-var cookie = require('cookie');
-
-function authIsOwner(request,response){
-    var isOwner = false;
-    var cookies = {};
-
-    if(request.headers.cookie) {
-        cookies = cookie.parse(request.headers.cookie);
-    }
-    // request.on('end' ,function(){
-    //     db.query(`SELECT * FROM login WHERE email = ? AND password=?`,[cookies.email,cookies.password],function(error,result){
-    //         if(error) throw error;
-    //         if(result.length === 1) isOwner = true;
-    //         else isOwner = true;
-    //         return isOwner;
-    //     });
-    // }); //동기로 처리?
-    return true; //우선 진행을 위해 true처리
-}
 
 var app = http.createServer(function(request,response){ //서버시작
     var _url = request.url;
     var queryData = url.parse(_url,true).query;
     var pathname = url.parse(_url,true).pathname;
-    var isOwner = authIsOwner(request,response);
-    var authStatusUI = '<a href="/login">login</a>';
-    if(isOwner) authStatusUI = '<a href="/logout_process">logout</a>'
     
     if(pathname === '/') {
         if(queryData.id === undefined) { //메인
